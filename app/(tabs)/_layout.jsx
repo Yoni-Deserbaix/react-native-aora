@@ -13,7 +13,8 @@ export default function TabsLayout() {
         className="w-6 h-6"
       />
       <Text
-        className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
+        className={`${focused ? "font-psemibold" : "font-pregular"} text-xs `}
+        style={(color = { color })}
       >
         {name}
       </Text>
@@ -25,6 +26,14 @@ export default function TabsLayout() {
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
+          tabBarActiveTintColor: "#ffa001",
+          tabBarInactiveTintColor: "#cdcde0",
+          tabBarStyle: {
+            backgroundColor: "#161622",
+            borderTopWidth: 1,
+            borderTopColor: "#232533",
+            height: 83,
+          },
         }}
       >
         <Tabs.Screen
