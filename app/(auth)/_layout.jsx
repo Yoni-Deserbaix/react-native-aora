@@ -4,10 +4,12 @@ import React from "react";
 
 export default function AuthLayout() {
   return (
-    <Stack>
-      <Stack.Screen name="signIn" options={{ headerShown: false }} />
-      <Stack.Screen name="signUp" options={{ headerShown: false }} />
+    <>
+      <Stack>
+        <Stack.Screen name="signIn" options={{ headerShown: false }} />
+        <Stack.Screen name="signUp" options={{ headerShown: false }} />
+      </Stack>
       <StatusBar style="light" backgroundColor="#161622" />
-    </Stack>
+    </>
   );
 }
