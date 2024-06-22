@@ -6,11 +6,10 @@ import FieldForm from "../../components/FieldForm";
 import { images } from "../../constants";
 
 export default function signIn() {
-  const [form, setform] = useState({
+  const [form, setForm] = useState({
     email: "",
     password: "",
   });
-
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -27,14 +26,14 @@ export default function signIn() {
           <FieldForm
             title="Email"
             value={form.email}
-            handleTextChange={(e) => setform({ ...form, email: e })}
+            handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
             keyboardType="email-adress"
           />
           <FieldForm
             title="Password"
             value={form.password}
-            handleTextChange={(e) => setform({ ...form, password: e })}
+            handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
           />
         </View>
