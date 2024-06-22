@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { Link } from "expo-router";
 import CustomButton from "../../components/CustomButton";
 import FieldForm from "../../components/FieldForm";
 import { images } from "../../constants";
 
-export default function signIn() {
+export default function SignIn() {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -19,7 +20,7 @@ export default function signIn() {
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
-        <View className="w-full h-min-[83vh] justify-center px-4 my-6">
+        <View className="w-full min-h-[83vh] justify-center px-4 my-6">
           <Image
             source={images.logo}
             className="w-[115px] h-[35px]"
@@ -47,6 +48,17 @@ export default function signIn() {
             containerStyles="mt-7"
             isLoading={isSubmitting}
           />
+          <View className="justify-center pt-5 flex-row gap-2">
+            <Text className="text-lg text-gray-100 font-pregular">
+              Don't have account?
+            </Text>
+            <Link
+              href="/signUp"
+              className="text-lg font-pregular text-secondary"
+            >
+              Sign Up
+            </Link>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
