@@ -43,7 +43,7 @@ export default function SignIn() {
             otherStyles="mt-7"
           />
           <CustomButton
-            title="sign in"
+            title="Sign In"
             handlePress={onSubmit}
             containerStyles="mt-7"
             isLoading={isSubmitting}
