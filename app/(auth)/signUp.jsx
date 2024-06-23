@@ -6,6 +6,7 @@ import { Link } from "expo-router";
 import CustomButton from "../../components/CustomButton";
 import FieldForm from "../../components/FieldForm";
 import { images } from "../../constants";
+import { createUser } from "../../lib/appwrite";
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -16,7 +17,9 @@ export default function SignUp() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    createUser();
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full">
