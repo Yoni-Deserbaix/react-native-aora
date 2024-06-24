@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import { signOut } from "../../lib/appwrite";
+import SearchInput from "../../components/SearchInput";
 export default function Home() {
   const { isLoading, setIsLoggedIn, user, setUser } = useGlobalContext();
   const logout = async () => {
@@ -46,6 +47,7 @@ export default function Home() {
                 ></Image>
               </View>
             </View>
+            <SearchInput />
           </View>
         )}
       />
