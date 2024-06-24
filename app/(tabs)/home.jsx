@@ -9,19 +9,18 @@ import { getAllPosts } from "../../lib/appwrite";
 import useAppWrite from "../../lib/useAppWrite";
 
 export default function Home() {
-  const { data: posts } = useAppWrite(getAllPosts);
+  const { data: posts, refetch } = useAppWrite(getAllPosts);
   const [refreshing, setRefreshing] = useState(false);
 
   const { setIsLoggedIn, user, setUser } = useGlobalContext();
 
   const onRefresh = async () => {
     setRefreshing(true);
-
     //re call videos -> if any new videos appeard
+    await refetch();
     setRefreshing(false);
   };
 
-  console.log(posts);
   // const logout = async () => {
   //   await signOut();
   //   setUser(null);
