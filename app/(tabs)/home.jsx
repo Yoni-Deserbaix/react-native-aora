@@ -36,10 +36,10 @@ export default function Home() {
         <Text className="p-4 text-xl bg-green-500">logout</Text>
       </TouchableOpacity> */}
       <FlatList
-        // data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
-        keyExtractor={(item) => item.id.toString()} // FlatList is like map in JS
+        data={posts}
+        keyExtractor={(item) => item.$id} // FlatList is like map in JS
         renderItem={({ item }) => (
-          <Text className="text-3xl text-white">{item.id}</Text>
+          <Text className="text-3xl text-white">{item.title}</Text>
         )}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
