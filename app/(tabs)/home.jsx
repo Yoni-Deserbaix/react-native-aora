@@ -1,17 +1,25 @@
-import { router } from "expo-router";
-import React, { useState } from "react";
-import { FlatList, Image, RefreshControl, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Alert,
+  FlatList,
+  Image,
+  RefreshControl,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import EmptyState from "../../components/EmptyState";
 import SearchInput from "../../components/SearchInput";
-import Trending from "../../components/Trending";
 import { images } from "../../constants";
 import { useGlobalContext } from "../../context/GlobalProvider";
-import { signOut } from "../../lib/appwrite";
+import { getAllPosts } from "../../lib/appwrite";
 
 export default function Home() {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const { isLoading, setIsLoggedIn, user, setUser } = useGlobalContext();
+
+  const { setIsLoggedIn, user, setUser } = useGlobalContext();
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -20,21 +28,37 @@ export default function Home() {
     setRefreshing(false);
   };
 
-  const logout = async () => {
-    await signOut();
-    setUser(null);
-    setIsLoggedIn(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
 
-    router.replace("/signIn");
-  };
+      try {
+        const response = await getAllPosts();
+        setData(response);
+      } catch (error) {
+        Alert.alert("Error", error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  console.log("data: ", data);
+
+  // const logout = async () => {
+  //   await signOut();
+  //   setUser(null);
+  //   setIsLoggedIn(false);
+
+  //   router.replace("/signIn");
+  // };
 
   console.log("hello", user?.username);
   return (
     <SafeAreaView className="bg-primary  h-full">
-      {/* <Text className="text-2xl p-10 text-white">Hello</Text>
-      <Text className="text-2xl p-10 text-white">{user?.username}</Text> */}
       {/* <TouchableOpacity onPress={logout}>
-        <Text className="p-10 text-xl bg-green-500">logout</Text>
+        <Text className="p-4 text-xl bg-green-500">logout</Text>
       </TouchableOpacity> */}
       <FlatList
         // data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
@@ -50,7 +74,7 @@ export default function Home() {
                   Welcome Back,
                 </Text>
                 <Text className="text-2xl font-psemibold text-white">
-                  {user?.username ?? "Y2"}
+                  {user?.username}
                 </Text>
               </View>
 
@@ -68,7 +92,7 @@ export default function Home() {
                 Latest videos
               </Text>
               {/* Horizontal scrolling */}
-              <Trending posts={[{ id: 1 }, { id: 2 }, { id: 4 }] ?? []} />
+              {/* <Trending posts={[{ id: 1 }, { id: 2 }, { id: 4 }] ?? []} /> */}
             </View>
           </View>
         )}
