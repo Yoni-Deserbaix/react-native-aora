@@ -22,6 +22,7 @@ export default function FieldForm({
           placeholderTextColor="#7b7b8b"
           onChangeText={handleChangeText}
           secureTextEntry={title === "Password" && !showPassword}
+          {...props}
         ></TextInput>
         {title === "Password" && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
