@@ -2,6 +2,7 @@ import { router } from "expo-router";
 import React from "react";
 import { FlatList, Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import EmptyState from "../../components/EmptyState";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
 import { images } from "../../constants";
@@ -20,15 +21,15 @@ export default function Home() {
 
   console.log("hello", user?.username);
   return (
-    <SafeAreaView className="bg-primary">
+    <SafeAreaView className="bg-primary  h-full">
       {/* <Text className="text-2xl p-10 text-white">Hello</Text>
       <Text className="text-2xl p-10 text-white">{user?.username}</Text> */}
       {/* <TouchableOpacity onPress={logout}>
         <Text className="p-10 text-xl bg-green-500">logout</Text>
       </TouchableOpacity> */}
       <FlatList
-        data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
-        keyExtractor={(item) => item.$id} // FlatList is like map in JS
+        // data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+        keyExtractor={(item) => item.id.toString()} // FlatList is like map in JS
         renderItem={({ item }) => (
           <Text className="text-3xl text-white">{item.id}</Text>
         )}
@@ -58,10 +59,15 @@ export default function Home() {
                 Latest videos
               </Text>
               {/* Horizontal scrolling */}
-              <Trending posts={[{ id: 1 }, { id: 2 }, { id: 4 }] ?? []} /> 
+              <Trending posts={[{ id: 1 }, { id: 2 }, { id: 4 }] ?? []} />
             </View>
-
           </View>
+        )}
+        ListEmptyComponent={() => (
+          <EmptyState
+            title="No Videos found"
+            subtitle="Be the first one to upload a video"
+          />
         )}
       />
     </SafeAreaView>
