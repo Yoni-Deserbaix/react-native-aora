@@ -1,4 +1,5 @@
 import { Tabs } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Image, Text, View } from "react-native";
 import { icons } from "../../constants";
@@ -99,6 +100,7 @@ export default function TabsLayout() {
           }}
         />
       </Tabs>
+      <StatusBar style="light" backgroundColor="#161622" />
     </>
   );
 }
