@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from "react";
-import {
-  Alert,
-  FlatList,
-  Image,
-  RefreshControl,
-  Text,
-  View,
-} from "react-native";
+import React, { useState } from "react";
+import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import EmptyState from "../../components/EmptyState";
 import SearchInput from "../../components/SearchInput";
 import { images } from "../../constants";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import { getAllPosts } from "../../lib/appwrite";
+import useAppWrite from "../../lib/useAppWrite";
 
 export default function Home() {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data: posts } = useAppWrite(getAllPosts);
   const [refreshing, setRefreshing] = useState(false);
 
   const { setIsLoggedIn, user, setUser } = useGlobalContext();
@@ -28,24 +21,7 @@ export default function Home() {
     setRefreshing(false);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-
-      try {
-        const response = await getAllPosts();
-        setData(response);
-      } catch (error) {
-        Alert.alert("Error", error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  console.log("data: ", data);
-
+  console.log(posts);
   // const logout = async () => {
   //   await signOut();
   //   setUser(null);
