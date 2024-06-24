@@ -2,10 +2,12 @@ import { router } from "expo-router";
 import React from "react";
 import { FlatList, Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import SearchInput from "../../components/SearchInput";
+import Trending from "../../components/Trending";
 import { images } from "../../constants";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import { signOut } from "../../lib/appwrite";
-import SearchInput from "../../components/SearchInput";
+
 export default function Home() {
   const { isLoading, setIsLoggedIn, user, setUser } = useGlobalContext();
   const logout = async () => {
@@ -35,19 +37,30 @@ export default function Home() {
             <View className="justify-between items-start flex-row mb-6">
               <View>
                 <Text className="font-pmedium text-sm text-gray-100">
-                  Welcome back
+                  Welcome Back,
                 </Text>
-                <Text className="text-2xl font-psemibold text-white">y2</Text>
+                <Text className="text-2xl font-psemibold text-white">
+                  {user?.username ?? "Y2"}
+                </Text>
               </View>
+
               <View className="mt-1.5">
                 <Image
                   source={images.logoSmall}
                   className="w-9 h-10"
                   resizeMode="contain"
-                ></Image>
+                />
               </View>
             </View>
             <SearchInput />
+            <View className="w-full flex-1 pt-5 pb-8">
+              <Text className="text-gray-100 text-lg font-pregular mb-3">
+                Latest videos
+              </Text>
+              {/* Horizontal scrolling */}
+              <Trending posts={[{ id: 1 }, { id: 2 }, { id: 4 }] ?? []} /> 
+            </View>
+
           </View>
         )}
       />
