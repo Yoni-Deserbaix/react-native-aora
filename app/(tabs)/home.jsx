@@ -1,6 +1,6 @@
 import { router } from "expo-router";
-import React from "react";
-import { FlatList, Image, Text, View } from "react-native";
+import React, { useState } from "react";
+import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import EmptyState from "../../components/EmptyState";
 import SearchInput from "../../components/SearchInput";
@@ -10,7 +10,16 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 import { signOut } from "../../lib/appwrite";
 
 export default function Home() {
+  const [refreshing, setRefreshing] = useState(false);
   const { isLoading, setIsLoggedIn, user, setUser } = useGlobalContext();
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+
+    //re call videos -> if any new videos appeard
+    setRefreshing(false);
+  };
+
   const logout = async () => {
     await signOut();
     setUser(null);
@@ -63,12 +72,17 @@ export default function Home() {
             </View>
           </View>
         )}
+        // Conditional rendering if there are no videos
         ListEmptyComponent={() => (
           <EmptyState
             title="No Videos found"
             subtitle="Be the first one to upload a video"
           />
         )}
+        // Refresh function when user scrolls up
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
     </SafeAreaView>
   );
