@@ -6,27 +6,28 @@ import { Link, router } from "expo-router";
 import CustomButton from "../../components/CustomButton";
 import FieldForm from "../../components/FieldForm";
 import { images } from "../../constants";
-import { signIn } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
+import { getCurrentUser, signIn } from "../../lib/appwrite";
 
 export default function SignIn() {
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
-
+  const { setUser, isLoggedIn } = useGlobalContext();
+  const [form, setForm] = useState({ email: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async () => {
     if (!form.email || !form.password) {
       Alert.alert("Error, Please fill in all the fields");
-      return;
     }
 
     setIsSubmitting(true);
     try {
-      const result = await signIn(form.email, form.password);
+      await signIn(form.email, form.password);
 
       // set it to global state
+      const result = await getCurrentUser();
+      setUser(result);
+      // isLoggedIn(true);
+
       router.replace("/home");
     } catch (error) {
       Alert.alert("Error", error.message);
@@ -51,7 +52,7 @@ export default function SignIn() {
             value={form.email}
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
-            keyboardType="email-adress"
+            keyboardType="email-address"
           />
           <FieldForm
             title="Password"
