@@ -1,9 +1,9 @@
+import { ResizeMode, Video } from "expo-av";
 import React, { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { icons } from "../constants";
 
 export default function VideoCard({
-  //   video,
   title,
   thumbnail,
   video,
@@ -11,7 +11,7 @@ export default function VideoCard({
   avatar,
   creator,
 }) {
-//   console.log("Thumbnail URL:", thumbnail);
+  //   console.log("Thumbnail URL:", thumbnail);
 
   const [play, setPlay] = useState(false);
 
@@ -49,11 +49,22 @@ export default function VideoCard({
       </View>
 
       {play ? (
-        <Text className="text-white">Playing</Text>
+        <Video
+          source={{ uri: video }}
+          className="w-full h-60 rounded-xl mt-3"
+          resizeMode={ResizeMode.CONTAIN}
+          useNativeControls
+          shouldPlay
+          onPlaybackStatusUpdate={(status) => {
+            if (status.didJustFinish) {
+              setPlay(false);
+            }
+          }}
+        />
       ) : (
         <TouchableOpacity
           activeOpacity={0.7}
-        //   onPress={() => setPlay(false)}
+          onPress={() => setPlay(true)}
           className="w-full h-60 rounded-xl mt-3 flex relative justify-center items-center"
         >
           <Image
