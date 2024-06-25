@@ -1,9 +1,9 @@
+import { ResizeMode, Video } from "expo-av";
 import React, { useState } from "react";
 import {
   FlatList,
   Image,
   ImageBackground,
-  Text,
   TouchableOpacity,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
@@ -28,7 +28,7 @@ const ZoomOut = {
 
 const TrendingItem = ({ activeItem, item }) => {
   const [play, setPlay] = useState(false);
-  // console.log(item.thumbnail);
+  // console.log(item.video);
   return (
     <Animatable.View
       className="mr-5"
@@ -36,12 +36,23 @@ const TrendingItem = ({ activeItem, item }) => {
       duration={500} // ms
     >
       {play ? (
-        <Text className="text-white">Playing</Text>
+        <Video
+          source={{ uri: item.video }}
+          className="w-52 h-72 rounded-[35px] mt-3 bg-white/10"
+          resizeMode={ResizeMode.CONTAIN}
+          useNativeControls
+          shouldPlay
+          onPlaybackStatusUpdate={(status) => {
+            if (status.didJustFinish) {
+              setPlay(false);
+            }
+          }}
+        />
       ) : (
         <TouchableOpacity
           className="relative justify-center items-center"
           activeOpacity={0.7}
-          // onPress={setPlay(true)}
+          onPress={() => setPlay(true)}
         >
           <ImageBackground
             source={{ uri: item.thumbnail }}
@@ -60,7 +71,7 @@ const TrendingItem = ({ activeItem, item }) => {
 };
 
 export default function Trending({ posts }) {
-  const [activeItem, setActiveItem] = useState(posts);
+  const [activeItem, setActiveItem] = useState(posts[0]);
 
   const viewableItemsChanged = ({ viewableItems }) => {
     if (viewableItems.length > 0) {
