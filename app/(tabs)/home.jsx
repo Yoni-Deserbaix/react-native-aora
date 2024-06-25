@@ -3,13 +3,18 @@ import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import EmptyState from "../../components/EmptyState";
 import SearchInput from "../../components/SearchInput";
+import VideoCard from "../../components/VideoCard";
 import { images } from "../../constants";
 import { useGlobalContext } from "../../context/GlobalProvider";
-import { getAllPosts } from "../../lib/appwrite";
+import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
 import useAppWrite from "../../lib/useAppWrite";
+import Trending from "../../components/Trending";
 
 export default function Home() {
   const { data: posts, refetch } = useAppWrite(getAllPosts);
+  const { data: latestPosts } = useAppWrite(getLatestPosts);
+
+
   const [refreshing, setRefreshing] = useState(false);
 
   const { setIsLoggedIn, user, setUser } = useGlobalContext();
@@ -39,7 +44,13 @@ export default function Home() {
         data={posts}
         keyExtractor={(item) => item.$id} // FlatList is like map in JS
         renderItem={({ item }) => (
-          <Text className="text-3xl text-white">{item.title}</Text>
+          <VideoCard
+            // video={item.video}
+            title={item.title}
+            thumbnail={item.thumbnail}
+            creator={item.creator.username}
+            avatar={item.creator.avatar}
+          />
         )}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
@@ -67,7 +78,7 @@ export default function Home() {
                 Latest videos
               </Text>
               {/* Horizontal scrolling */}
-              {/* <Trending posts={[{ id: 1 }, { id: 2 }, { id: 4 }] ?? []} /> */}
+              <Trending posts={latestPosts ?? []} />
             </View>
           </View>
         )}

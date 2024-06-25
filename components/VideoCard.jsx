@@ -11,7 +11,7 @@ export default function VideoCard({
   avatar,
   creator,
 }) {
-  console.log("Thumbnail URL:", thumbnail);
+//   console.log("Thumbnail URL:", thumbnail);
 
   const [play, setPlay] = useState(false);
 
