@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { Alert, Image, TextInput, TouchableOpacity, View } from "react-native";
 import { icons } from "../constants";
 
-export default function SearchInput({ value, handleChangeText }) {
+export default function SearchInput({ initialQuery }) {
   const pathname = usePathname(); // get the current path
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initialQuery || "");
   return (
     <View className="border-2 flex-row border-black-200 w-full h-16 px-4 bg-black-100 rounded-2xl focus:border-secondary items-center space-x-4">
       <TextInput
