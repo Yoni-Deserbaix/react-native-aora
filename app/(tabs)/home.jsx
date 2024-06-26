@@ -16,7 +16,7 @@ export default function Home() {
 
   const [refreshing, setRefreshing] = useState(false);
 
-  const { setIsLoggedIn, user, setUser } = useGlobalContext();
+  const { user } = useGlobalContext();
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -25,20 +25,8 @@ export default function Home() {
     setRefreshing(false);
   };
 
-  // const logout = async () => {
-  //   await signOut();
-  //   setUser(null);
-  //   setIsLoggedIn(false);
-
-  //   router.replace("/signIn");
-  // };
-
-  console.log("hello", user?.username);
   return (
     <SafeAreaView className="bg-primary  h-full">
-      {/* <TouchableOpacity onPress={logout}>
-        <Text className="p-4 text-xl bg-green-500">logout</Text>
-      </TouchableOpacity> */}
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id} // FlatList is like map in JS
