@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Image } from "react-native-animatable";
 import { SafeAreaView } from "react-native-safe-area-context";
+import CustomButton from "../../components/CustomButton";
 import FieldForm from "../../components/FieldForm";
 import { icons } from "../../constants";
 
@@ -14,6 +15,9 @@ export default function Create() {
     thumbnail: null,
     prompt: "",
   });
+
+  const handleSubmit = () => {};
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView className="px-4 my-6">
@@ -76,6 +80,19 @@ export default function Create() {
             )}
           </TouchableOpacity>
         </View>
+        <FieldForm
+          title="AI Prompt"
+          value={form.prompt}
+          placeholder="The AI prompt of your video"
+          handleChangeText={(e) => setForm({ ...form, title: e })}
+          otherStyles="mt-7"
+        />
+        <CustomButton
+          title="Submit & Publish"
+          handlePress={handleSubmit}
+          containerStyles="mt-7"
+          isLoading={uploading}
+        />
       </ScrollView>
     </SafeAreaView>
   );
