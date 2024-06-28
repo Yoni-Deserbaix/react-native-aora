@@ -1,5 +1,6 @@
 import { ResizeMode, Video } from "expo-av";
 import * as DocumentPicker from "expo-document-picker";
+import { router } from "expo-router";
 import React, { useState } from "react";
 import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Image } from "react-native-animatable";
@@ -38,7 +39,22 @@ export default function Create() {
     }
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    if (!form.prompt || !form.title || form.thumbnail || form.video) {
+      return Alert.alert("Please fill in all the fields");
+    }
+    setUploading(true);
+
+    try {
+      Alert.alert("Succes", "Post uploaded successful");
+      router.push("/home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setForm({ title: "", video: null, thumbnail: null, prompt: "" });
+    }
+    setUploading(false);
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full">
