@@ -1,5 +1,5 @@
 import { ResizeMode, Video } from "expo-av";
-import * as DocumentPicker from "expo-document-picker";
+import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
@@ -22,12 +22,22 @@ export default function Create() {
   });
 
   const openPicker = async (selectType) => {
-    const result = await DocumentPicker.getDocumentAsync({
-      type:
+    // const result = await DocumentPicker.getDocumentAsync({
+    //   type:
+    //     selectType === "image"
+    //       ? ["image/png", "image/jpg", "image/jpeg"]
+    //       : ["video/mp4", "video/gif"],
+    // });
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes:
         selectType === "image"
-          ? ["image/png", "image/jpg", "image/jpeg"]
-          : ["video/mp4", "video/gif"],
+          ? ImagePicker.MediaTypeOptions.Images
+          : ImagePicker.MediaTypeOptions.Videos,
+      aspect: [4, 3],
+      quality: 1,
     });
+
     if (!result.canceled) {
       if (selectType === "image") {
         setForm({ ...form, thumbnail: result.assets[0] });
