@@ -8,8 +8,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../../components/CustomButton";
 import FieldForm from "../../components/FieldForm";
 import { icons } from "../../constants";
+import { useGlobalContext } from "../../context/GlobalProvider";
+import { createVideo } from "../../lib/appwrite";
 
 export default function Create() {
+  const { user } = useGlobalContext();
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({
     title: "",
@@ -22,7 +25,7 @@ export default function Create() {
     const result = await DocumentPicker.getDocumentAsync({
       type:
         selectType === "image"
-          ? ["image/png", "image/jpg"]
+          ? ["image/png", "image/jpg", "image/jpeg"]
           : ["video/mp4", "video/gif"],
     });
     if (!result.canceled) {
@@ -39,13 +42,18 @@ export default function Create() {
     }
   };
 
-  const handleSubmit = () => {
-    if (!form.prompt || !form.title || form.thumbnail || form.video) {
+  const handleSubmit = async () => {
+    if (!form.prompt || !form.title || !form.thumbnail || !form.video) {
       return Alert.alert("Please fill in all the fields");
     }
     setUploading(true);
 
     try {
+      await createVideo({
+        ...form,
+        userId: user.$id,
+      });
+
       Alert.alert("Succes", "Post uploaded successful");
       router.push("/home");
     } catch (error) {
@@ -76,7 +84,6 @@ export default function Create() {
               <Video
                 source={{ uri: form.video.uri }}
                 className="w-full h-64 rounded-2xl"
-                useNativeControls
                 resizeMode={ResizeMode.COVER}
                 isLooping
               />
@@ -122,7 +129,7 @@ export default function Create() {
           title="AI Prompt"
           value={form.prompt}
           placeholder="The AI prompt of your video"
-          handleChangeText={(e) => setForm({ ...form, title: e })}
+          handleChangeText={(e) => setForm({ ...form, prompt: e })}
           otherStyles="mt-7"
         />
         <CustomButton
