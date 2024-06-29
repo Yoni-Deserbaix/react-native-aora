@@ -51,7 +51,7 @@ export default function VideoCard({
       {play ? (
         <Video
           source={{ uri: video }}
-          className="w-full h-60 rounded-xl mt-3"
+          className="w-full h-52 rounded-xl mt-3"
           resizeMode={ResizeMode.CONTAIN}
           useNativeControls
           shouldPlay
@@ -65,7 +65,7 @@ export default function VideoCard({
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={() => setPlay(true)}
-          className="w-full h-60 rounded-xl mt-3 flex relative justify-center items-center"
+          className="w-full h-52 rounded-xl mt-3 flex relative justify-center items-center"
         >
           <Image
             source={{ uri: thumbnail }}
