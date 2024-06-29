@@ -1,6 +1,12 @@
 import { router } from "expo-router";
-import React from "react";
-import { FlatList, Image, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import {
+  FlatList,
+  Image,
+  RefreshControl,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import EmptyState from "../../components/EmptyState";
 import InfoBox from "../../components/InfoBox";
@@ -12,7 +18,8 @@ import useAppWrite from "../../lib/useAppWrite";
 
 export default function Profile() {
   const { user, setUser, setIsLoggedIn } = useGlobalContext();
-  const { data: posts } = useAppWrite(() => getUserPosts(user.$id));
+  const { data: posts, refetch } = useAppWrite(() => getUserPosts(user.$id));
+  const [refreshing, setRefreshing] = useState(false);
 
   const logout = async () => {
     await signOut();
@@ -22,11 +29,22 @@ export default function Profile() {
     router.replace("/signIn");
   };
 
+  const onRefresh = async () => {
+    setRefreshing(true);
+    //re call videos -> if any new videos appeard
+    await refetch();
+    setRefreshing(false);
+  };
+
   console.log(user?.username);
 
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
+        // Refresh function when user scrolls up
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         data={posts}
         keyExtractor={(item) => item.$id} // FlatList is like map in JS
         renderItem={({ item }) => (
