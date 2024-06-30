@@ -3,6 +3,7 @@ import { Alert, Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Link, router } from "expo-router";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import CustomButton from "../../components/CustomButton";
 import FieldForm from "../../components/FieldForm";
 import { images } from "../../constants";
@@ -38,57 +39,60 @@ export default function SignUp() {
 
   return (
     <SafeAreaView className="bg-primary h-full">
-      <ScrollView>
-        <View className="w-full min-h-[83vh] justify-center px-4 my-6">
-          <Image
-            source={images.logo}
-            className="w-[115px] h-[35px]"
-            resizeMode="contain"
-          ></Image>
-          <Text className="text-2xl text-white text-semibold mt-10 font-psemibold">
-            Sing Up to Aora
-          </Text>
-          <FieldForm
-            title="Username"
-            value={form.username}
-            handleChangeText={(e) => setForm({ ...form, username: e })}
-            otherStyles="mt-10"
-            placeholder="Your unique username"
-          />
-          <FieldForm
-            title="Email"
-            value={form.email}
-            handleChangeText={(e) => setForm({ ...form, email: e })}
-            otherStyles="mt-7"
-            keyboardType="email-address"
-            placeholder="Your email address"
-          />
-          <FieldForm
-            title="Password"
-            value={form.password}
-            handleChangeText={(e) => setForm({ ...form, password: e })}
-            otherStyles="mt-7"
-            placeholder="Your password"
-          />
-          <CustomButton
-            title="Sign Up"
-            handlePress={onSubmit}
-            containerStyles="mt-7"
-            isLoading={isSubmitting}
-          />
-          <View className="justify-center pt-5 flex-row gap-2">
-            <Text className="text-base text-gray-100 font-pregular">
-              Already an account?
+      {/* Adjust automatically screen position when input is clicked */}
+      <KeyboardAwareScrollView extraScrollHeight={150}>
+        <ScrollView>
+          <View className="w-full min-h-[83vh] justify-center px-4 my-6">
+            <Image
+              source={images.logo}
+              className="w-[115px] h-[35px]"
+              resizeMode="contain"
+            ></Image>
+            <Text className="text-2xl text-white text-semibold mt-10 font-psemibold">
+              Sing Up to Aora
             </Text>
-            <Link
-              href="/signIn"
-              className="text-base font-pregular text-secondary"
-            >
-              Sign In
-            </Link>
+            <FieldForm
+              title="Username"
+              value={form.username}
+              handleChangeText={(e) => setForm({ ...form, username: e })}
+              otherStyles="mt-10"
+              placeholder="Your unique username"
+            />
+            <FieldForm
+              title="Email"
+              value={form.email}
+              handleChangeText={(e) => setForm({ ...form, email: e })}
+              otherStyles="mt-7"
+              keyboardType="email-address"
+              placeholder="Your email address"
+            />
+            <FieldForm
+              title="Password"
+              value={form.password}
+              handleChangeText={(e) => setForm({ ...form, password: e })}
+              otherStyles="mt-7"
+              placeholder="Your password"
+            />
+            <CustomButton
+              title="Sign Up"
+              handlePress={onSubmit}
+              containerStyles="mt-7"
+              isLoading={isSubmitting}
+            />
+            <View className="justify-center pt-5 flex-row gap-2">
+              <Text className="text-base text-gray-100 font-pregular">
+                Already an account?
+              </Text>
+              <Link
+                href="/signIn"
+                className="text-base font-pregular text-secondary"
+              >
+                Sign In
+              </Link>
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 }
