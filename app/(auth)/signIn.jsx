@@ -27,8 +27,6 @@ export default function SignIn() {
       // set it to global state
       const result = await getCurrentUser();
       setUser(result);
-      isLoggedIn(true);
-
       router.replace("/home");
     } catch (error) {
       Alert.alert("Error", error.message);
