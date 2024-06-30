@@ -14,7 +14,7 @@ export default function Search() {
 
   useEffect(() => {
     refetch();
-  }, [query]);
+  }, [query, refetch]);
 
   // console.log(query, posts);
 
