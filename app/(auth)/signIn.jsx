@@ -69,12 +69,12 @@ export default function SignIn() {
             isLoading={isSubmitting}
           />
           <View className="justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-gray-100 font-pregular">
+            <Text className="text-base text-gray-100 font-pregular">
               Don't have account?
             </Text>
             <Link
               href="/signUp"
-              className="text-lg font-pregular text-secondary"
+              className="text-base font-pregular text-secondary"
             >
               Sign Up
             </Link>
