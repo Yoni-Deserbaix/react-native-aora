@@ -53,6 +53,7 @@ export default function SignUp() {
             value={form.username}
             handleChangeText={(e) => setForm({ ...form, username: e })}
             otherStyles="mt-10"
+            placeholder="Your unique username"
           />
           <FieldForm
             title="Email"
@@ -60,12 +61,14 @@ export default function SignUp() {
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
             keyboardType="email-address"
+            placeholder="Your email address"
           />
           <FieldForm
             title="Password"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
+            placeholder="Your password"
           />
           <CustomButton
             title="Sign Up"

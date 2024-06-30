@@ -16,7 +16,7 @@ export default function FieldForm({
       <Text className="text-base text-gray-100 font-pmedium">{title}</Text>
       <View className="border-2 flex-row border-black-200 w-full h-16 px-4 bg-black-100 rounded-2xl focus:border-secondary items-center">
         <TextInput
-          className="flex-1 text-white font-psemibold text-base"
+          className="flex-1 text-white font-pmedium text-base"
           value={value}
           placeholder={placeholder}
           placeholderTextColor="#7b7b8b"

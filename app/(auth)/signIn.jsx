@@ -26,7 +26,7 @@ export default function SignIn() {
       // set it to global state
       const result = await getCurrentUser();
       setUser(result);
-      // isLoggedIn(true);
+      isLoggedIn(true);
 
       router.replace("/home");
     } catch (error) {
@@ -53,12 +53,14 @@ export default function SignIn() {
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
             keyboardType="email-address"
+            placeholder="Your unique username"
           />
           <FieldForm
             title="Password"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
+            placeholder="Your password"
           />
           <CustomButton
             title="Sign In"
