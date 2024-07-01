@@ -32,6 +32,7 @@ export default function Home() {
         keyExtractor={(item) => item.$id} // FlatList is like map in JS
         renderItem={({ item }) => (
           <VideoCard
+            postId={item.$id}
             video={item.video}
             title={item.title}
             thumbnail={item.thumbnail}

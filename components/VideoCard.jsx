@@ -1,9 +1,11 @@
 import { ResizeMode, Video } from "expo-av";
 import React, { useState } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, Text, TouchableOpacity, View } from "react-native";
 import { icons } from "../constants";
+import { deletePost } from "../lib/appwrite";
 
 export default function VideoCard({
+  postId,
   title,
   thumbnail,
   video,
@@ -18,7 +20,14 @@ export default function VideoCard({
     setIsVisible(!isVisible);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
+    try {
+      await deletePost(postId);
+      Alert.alert("Post deleted successfuly");
+    } catch (error) {
+      Alert.alert("Could not delete post", error.message);
+    }
+
     console.log("Delete pressed");
   };
 
@@ -73,7 +82,7 @@ export default function VideoCard({
                   <Text className="text-lg text-white font-pmedium">Save</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => handleDelete()}
+                  onPress={handleDelete}
                   className="flex-row items-center w-full"
                 >
                   <Image
