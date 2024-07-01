@@ -14,9 +14,8 @@ export default function DropdownMenu() {
       <TouchableOpacity onPress={handleSelect}>
         <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
       </TouchableOpacity>
-
       {isVisible && (
-        <View className="border border-[#232533] px-4 rounded-xl absolute top-10 right-0 h-[85px] w-44 z-50 gap-2 bg-[#1E1E2D] justify-start items-center">
+        <View className="border border-[#232533] px-4 rounded-xl absolute top-10 right-0 h-[85px] w-[130px] z-50 gap-2 bg-[#1E1E2D] justify-start items-center">
           <TouchableOpacity
             onPress={() => console.log("Save pressed")}
             className="flex-row items-center w-full"
