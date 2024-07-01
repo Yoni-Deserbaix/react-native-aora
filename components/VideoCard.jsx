@@ -2,6 +2,7 @@ import { ResizeMode, Video } from "expo-av";
 import React, { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { icons } from "../constants";
+import DropdownMenu from "./DropdownMenu";
 
 export default function VideoCard({
   title,
@@ -11,8 +12,6 @@ export default function VideoCard({
   avatar,
   creator,
 }) {
-  //   console.log("Thumbnail URL:", thumbnail);
-
   const [play, setPlay] = useState(false);
 
   return (
@@ -44,14 +43,15 @@ export default function VideoCard({
         </View>
 
         <View className="pt-2">
-          <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
+          {/* Ensure high z-index */}
+          <DropdownMenu />
         </View>
       </View>
 
       {play ? (
         <Video
           source={{ uri: video }}
-          className="w-full h-60 rounded-xl mt-3"
+          className="w-full h-60 rounded-xl mt-3 -z-10"
           resizeMode={ResizeMode.CONTAIN}
           useNativeControls
           shouldPlay
@@ -65,7 +65,7 @@ export default function VideoCard({
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={() => setPlay(true)}
-          className="w-full h-60 rounded-xl mt-3 flex relative justify-center items-center"
+          className="w-full h-60 rounded-xl mt-3 flex relative justify-center items-center -z-10"
         >
           <Image
             source={{ uri: thumbnail }}
