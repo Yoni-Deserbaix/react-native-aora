@@ -54,7 +54,7 @@ export default function SignIn() {
               handleChangeText={(e) => setForm({ ...form, email: e })}
               otherStyles="mt-7"
               keyboardType="email-address"
-              placeholder="Your unique username"
+              placeholder="Your email address"
             />
             <FieldForm
               title="Password"
