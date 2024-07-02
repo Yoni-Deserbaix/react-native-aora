@@ -6,7 +6,7 @@ export default function Saved() {
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView className="px-4 my-6">
-        <Text className="text-2xl text-white">Saved</Text>
+        <Text className="text-2xl text-white font-psemibold">Saved</Text>
       </ScrollView>
     </SafeAreaView>
   );

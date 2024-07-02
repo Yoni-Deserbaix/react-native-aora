@@ -76,7 +76,9 @@ export default function Create() {
       {/* Adjust automatically screen position when input is clicked */}
       <KeyboardAwareScrollView extraScrollHeight={150}>
         <ScrollView className="px-4 my-6">
-          <Text className="text-2xl text-white">Upload Video</Text>
+          <Text className="text-2xl text-white font-psemibold">
+            Upload Video
+          </Text>
           <FieldForm
             title="Video title"
             value={form.title}
