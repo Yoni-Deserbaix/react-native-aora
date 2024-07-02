@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Alert, Image, TextInput, TouchableOpacity, View } from "react-native";
 import { icons } from "../constants";
 
-export default function SearchInput({ initialQuery }) {
+export default function SearchInput({ initialQuery, placeholder }) {
   const pathname = usePathname(); // get the current path
   const [query, setQuery] = useState(initialQuery || "");
   return (
@@ -11,7 +11,7 @@ export default function SearchInput({ initialQuery }) {
       <TextInput
         className="text-base mt-0.5 text-white flex-1 font-pregular"
         value={query}
-        placeholder="Search for a video topic..."
+        placeholder={placeholder}
         placeholderTextColor="#cdcde0"
         onChangeText={(e) => setQuery(e)}
       ></TextInput>
