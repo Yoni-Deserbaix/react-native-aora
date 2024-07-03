@@ -32,10 +32,6 @@ export default function Home() {
     setRefreshing(false);
   };
 
-  const handleSavePost = () => {
-    console.log("Saved pressed");
-  };
-
   const handleDeletePost = async (postId) => {
     try {
       await deletePost(videoId);
@@ -45,6 +41,9 @@ export default function Home() {
       Alert.alert("Could not delete post", error.message);
     }
   };
+  const handleSavePost = () => {
+    console.log("Saved pressed");
+  };
 
   return (
     <SafeAreaView className="bg-primary  h-full">
@@ -53,7 +52,7 @@ export default function Home() {
         keyExtractor={(item) => item.$id} // FlatList is like map in JS
         renderItem={({ item }) => (
           <VideoCard
-            videoId={item.$id}
+            postId={item.$id}
             video={item.video}
             title={item.title}
             thumbnail={item.thumbnail}

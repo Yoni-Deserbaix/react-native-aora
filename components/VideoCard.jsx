@@ -4,7 +4,7 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import { icons } from "../constants";
 
 export default function VideoCard({
-  videoId,
+  postId,
   title,
   thumbnail,
   video,
@@ -72,7 +72,7 @@ export default function VideoCard({
                   <Text className="text-lg text-white font-pmedium">Save</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => onDelete(videoId)}
+                  onPress={() => onDelete(postId)}
                   className="flex-row items-center w-full"
                 >
                   <Image
