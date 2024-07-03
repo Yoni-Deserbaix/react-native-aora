@@ -38,7 +38,7 @@ export default function Home() {
 
   const handleDeletePost = async (postId) => {
     try {
-      await deletePost(postId);
+      await deletePost(videoId);
       await refetch();
       Alert.alert("Post deleted successfully");
     } catch (error) {
@@ -53,7 +53,7 @@ export default function Home() {
         keyExtractor={(item) => item.$id} // FlatList is like map in JS
         renderItem={({ item }) => (
           <VideoCard
-            postId={item.$id}
+            videoId={item.$id}
             video={item.video}
             title={item.title}
             thumbnail={item.thumbnail}
