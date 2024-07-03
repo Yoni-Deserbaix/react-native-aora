@@ -11,6 +11,7 @@ export default function VideoCard({
   username,
   avatar,
   creator,
+  onSave,
   onDelete,
 }) {
   const [play, setPlay] = useState(false);
@@ -60,7 +61,7 @@ export default function VideoCard({
             {isVisible && (
               <View className="border border-[#232533] px-4 rounded-xl absolute top-10 right-0 h-[85px] w-[130px] z-50 gap-2 bg-[#1E1E2D] justify-start items-center">
                 <TouchableOpacity
-                  onPress={() => console.log("Save pressed")}
+                  onPress={() => onSave(postId)}
                   className="flex-row items-center w-full"
                 >
                   <Image

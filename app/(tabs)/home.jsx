@@ -32,6 +32,10 @@ export default function Home() {
     setRefreshing(false);
   };
 
+  const handleSavePost = () => {
+    console.log("Saved pressed");
+  };
+
   const handleDeletePost = async (postId) => {
     try {
       await deletePost(postId);
@@ -55,6 +59,7 @@ export default function Home() {
             thumbnail={item.thumbnail}
             creator={item.creator.username}
             avatar={item.creator.avatar}
+            onSave={handleSavePost}
             onDelete={handleDeletePost}
           />
         )}
