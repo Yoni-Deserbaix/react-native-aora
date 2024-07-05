@@ -1,5 +1,14 @@
+# React Native Aora
 
-## 📋 <a name="table">Table of Contents</a>
+## 📝 Description
+
+**Aora** is a social media platform that allows users to share AI-generated videos with the
+community and discover trending videos.
+
+
+## 📖 Table of Contents
+
+<details><summary>Table of Contents</summary>
 
 1. 🤖 [Introduction](#introduction)
 2. ⚙️ [Tech Stack](#tech-stack)
@@ -8,12 +17,14 @@
 5. 🕸️ [Snippets](#snippets)
 6. 🔗 [Links](#links)
 
+</details>
+
 ## <a name="introduction">🤖 Introduction</a>
 
 Built with React Native for seamless user experiences, Animatable for captivating animations, and integrated with the dependable backend systems of Appwrite, 
 this app showcases impressive design and functionality, enabling seamless sharing of AI videos within the community.
 
-## <a name="tech-stack">⚙️ Tech Stack</a>
+## <a name="tech-stack">🌟 Technologies Used</a>
 
 - React Native
 - Expo
@@ -234,9 +245,35 @@ const videos = [
   },
 ];
 ```
-
 </details>
 
 ## <a name="links">🔗 Links</a>
 
 Assets and constants used in the project can be found [here](https://drive.google.com/drive/folders/1pckq7VAoqZlmsEfYaSsDltmQSESKm8h7?usp=sharing)
+
+
+## 🔧 Contributing
+
+[![contributors](https://contrib.rocks/image?repo=yoni-deserbaix/yoni-deserbaix)](https://github.com/Yoni-Deserbaix/Aora/graphs/contributors)
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and
+create. Any contributions you make are **greatly appreciated**.
+
+To fix a bug or enhance an existing module, follow these steps:
+
+1. Fork the repo
+2. Create a new branch (`git checkout -b improve-feature`)
+3. Make the appropriate changes in the files
+4. Commit your changes (`git commit -am 'Improve feature'`)
+5. Push to the branch (`git push origin improve-feature`)
+6. Create a Pull Request 🎉
+
+### 📩 Bug / Feature Request
+
+If you find a bug (failure of a module to execute its intended function), kindly open an issue
+[here](https://github.com/Yoni-Deserbaix/Aora/issues/new) by including the issue with a
+title and clear description.
+
+If you'd like to request a new function, feel free to do so by opening an issue
+[here](https://github.com/Yoni-Deserbaix/Aora/issues/new). Please include sample queries
+and their corresponding results.
