@@ -1,4 +1,5 @@
 # React Native Aora
+![image](https://github.com/user-attachments/assets/d159e04c-9f2c-4aa1-b6b3-fdcc07c8f79d)
 
 ## 📝 Description
 
